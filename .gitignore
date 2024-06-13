@@ -1,0 +1,11 @@
+.vscode/
+.vs/
+.idea/
+
+obj/
+bin/
+[Rr]elease/
+[Rr]eleases/
+
+
+
