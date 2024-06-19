@@ -1,3 +1,4 @@
+using FakeReddit.Data;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
 
@@ -6,7 +7,6 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DbContext") ?? throw new InvalidOperationException("Connection string 'DbContext' not found.")));
 
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +25,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Main}/{action=Index}/{id?}");
+    pattern: "{controller=Main}/{action=Index}/{theme?}");
+
 
 app.Run();

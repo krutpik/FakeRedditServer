@@ -1,0 +1,33 @@
+﻿@model List<Theme>
+
+@{
+    ViewBag.Title = "Main";
+    Layout = "_Layout";
+    var parms = new Dictionary<string, string>
+    {
+        { "speakerId", "11" },
+        { "currentYear", "true" }
+    };
+}
+
+@section style
+{
+    <link rel="stylesheet" href="~/css/main.css"/>
+}
+
+@foreach(var i in Model)
+{   
+    <div class="main">
+        <button onclick="changeRate('+', '@i.Id')">+</button>
+        <label>@i.Rate</label>
+        <button onclick="changeRate('-', '@i.Id')">-</button>
+        <label>@i.Title</label>
+        <label>Дата - @i.Date</label>   
+        <form asp-controller="Main" asp-action="Delete">
+            <input type="hidden" name="id" value="@i.Id"/>
+            <button>Удалить</button>
+        </form>
+        @*<button onclick="deleteTheme('@i.Id')" style="width: 50px; height: 100px">Delete</button>*@
+    </div>
+}
+

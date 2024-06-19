@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using FakeReddit.Models;
+﻿using FakeReddit.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace MvcMovie.Data
+namespace FakeReddit.Data
 {
     public class DataBaseContext : DbContext
     {
@@ -10,6 +10,6 @@ namespace MvcMovie.Data
         {
         }
 
-        public DbSet<Paper> Paper { get; set; }
+        public DbSet<Theme> Theme { get; set; }
     }
 }
