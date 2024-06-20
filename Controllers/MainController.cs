@@ -2,6 +2,7 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using FakeReddit.Data;
 using FakeReddit.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -11,6 +12,7 @@ namespace FakeReddit.Controllers
 {
     public class MainController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly DataBaseContext _context;
         
         public MainController(DataBaseContext context)
@@ -46,7 +48,7 @@ namespace FakeReddit.Controllers
             _context.Theme.Update(theme);
             await _context.SaveChangesAsync();
         }
-        
+
         [HttpPost]
         [ActionName("Create")]
         public async Task<ActionResult> CreateApi([Bind("Title")] Theme data)
