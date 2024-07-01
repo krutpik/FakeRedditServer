@@ -12,12 +12,11 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 builder.Services.AddDbContext<FakeRedditIdentityDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("FakeRedditIdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'FakeRedditIdentityDbContextConnection' not found.")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FakeRedditIdentityDbContext>();
-    
 
-builder.Services.AddScoped<SignInManager<IdentityUser>, MyIdentity>();
+builder.Services.AddScoped<SignInManager<ApplicationUser>, MyIdentity>();
 
 builder.Services.AddControllersWithViews();
 

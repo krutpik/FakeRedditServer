@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using FakeReddit.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -21,15 +22,15 @@ namespace FakeReddit.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-        private readonly SignInManager<IdentityUser> _myIdentity;
+        private readonly SignInManager<ApplicationUser> _myIdentity;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, SignInManager<IdentityUser> MyIdentity, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, SignInManager<ApplicationUser> myIdentity, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
-            _myIdentity = MyIdentity;
+            _myIdentity = myIdentity;
         }
 
         /// <summary>

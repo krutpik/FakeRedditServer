@@ -1,6 +1,6 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
-using FakeReddit.Data;
+using FakeReddit.Areas.Identity.Data;
 using FakeReddit.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,17 +12,17 @@ namespace FakeReddit.Controllers
 {
     public class MainController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly DataBaseContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly FakeRedditIdentityDbContext _context;
         
-        public MainController(DataBaseContext context)
+        public MainController(FakeRedditIdentityDbContext context)
         {
             _context = context;
         }
         public async Task<ViewResult> Index()
         {
             var theme = await _context.Theme.OrderBy(m => m.Id).ToListAsync();
-            return View(theme);
+            return View();
         }
 
         public async Task<ActionResult> Create()

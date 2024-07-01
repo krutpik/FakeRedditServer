@@ -1,13 +1,13 @@
-﻿@model List<Theme>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<ThemeView>
+
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewBag.Title = "Main";
     Layout = "_Layout";
-    var parms = new Dictionary<string, string>
-    {
-        { "speakerId", "11" },
-        { "currentYear", "true" }
-    };
+   
 }
 
 @section style
@@ -18,16 +18,20 @@
 @foreach(var i in Model)
 {   
     <div class="main">
-        <button onclick="changeRate('+', '@i.Id')">+</button>
+        @*<button onclick="changeRate('+', '@i.AspNetUsersId')">+</button>
         <label>@i.Rate</label>
-        <button onclick="changeRate('-', '@i.Id')">-</button>
+        <button onclick="changeRate('-', '@i.AspNetUsersId')">-</button>*@
         <label>@i.Title</label>
-        <label>Дата - @i.Date</label>   
-        <form asp-controller="Main" asp-action="Delete">
-            <input type="hidden" name="id" value="@i.Id"/>
-            <button>Удалить</button>
-        </form>
-        @*<button onclick="deleteTheme('@i.Id')" style="width: 50px; height: 100px">Delete</button>*@
+        <label>Дата - @i.Date.ToLocalTime().</label>   
+        <label>Создатель - @i.Writer</label>
+        @if (i.Writer == UserManager.GetUserName(User))
+        {
+            @*<form asp-controller="Main" asp-action="Delete">
+                <input type="hidden" name="id" value="@i.AspNetUsersId"/>
+                <button>Удалить</button>
+            </form>*@
+        }
+        
     </div>
 }
 

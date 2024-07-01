@@ -1,5 +1,4 @@
-﻿using FakeReddit.Data;
-using FakeReddit.Services;
+﻿using FakeReddit.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
@@ -9,12 +8,12 @@ namespace FakeReddit.Models;
 public class SeedData
 {
     private static RoleManager<IdentityRole>? _roleManager;
-    private static UserManager<IdentityUser>? _userManager;
+    private static UserManager<ApplicationUser>? _userManager;
 
     public static async Task Initialize(IServiceProvider serviceProvider, string? email, string? password, string? role)
     {
         _roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
-        _userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+        _userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
 
         await CreateAccount(email, password, role);
 
@@ -23,10 +22,10 @@ public class SeedData
     
     public static async Task CreateAccount(string? email, string? password, string? role)
         {
-            IdentityUser? user = await _userManager?.FindByEmailAsync(email);
+            ApplicationUser user = await _userManager?.FindByEmailAsync(email);
             if (user == null)
             {
-                user = new IdentityUser()
+                user = new ApplicationUser()
                 {   
                     Email = email,
                     UserName = email,

@@ -1,21 +1,28 @@
+using FakeReddit.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FakeReddit.Areas.Identity.Data;
 
-public class FakeRedditIdentityDbContext : IdentityDbContext<IdentityUser>
+public class FakeRedditIdentityDbContext : IdentityDbContext<ApplicationUser>
 {
     public FakeRedditIdentityDbContext(DbContextOptions<FakeRedditIdentityDbContext> options)
         : base(options)
     {
     }
-
+    
+    public DbSet<Theme> Theme { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+        /*builder.Entity<ApplicationUser>(b =>
+        {
+            b.HasMany(e => e.Themes)
+                .WithOne(e => e.User)
+                .HasForeignKey(uc => uc.UserId)
+                .IsRequired();
+        });*/
     }
 }

@@ -1,4 +1,9 @@
-﻿@model Theme
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Theme
+
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewBag.Title = "title";
@@ -10,6 +15,7 @@
         <label asp-for="Title"></label>
         <input asp-for="Title" />
         <span asp-validation-for="Title"></span>
+        <input type="hidden" asp-for="UserId" name="UserId" value="@UserManager.GetUserId(User)"/>
     </div>
     <input type="submit" asp-action="Create"/>
 </form>

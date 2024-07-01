@@ -9,7 +9,5 @@ namespace FakeReddit.Data
             : base(options)
         {
         }
-
-        public DbSet<Theme> Theme { get; set; }
     }
 }
