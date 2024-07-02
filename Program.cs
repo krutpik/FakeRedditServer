@@ -26,8 +26,9 @@ using (var scope = app.Services.CreateScope())
 {
     var configurationAdmin = builder.Configuration.GetSection("Admin");
     await SeedData.Initialize(scope.ServiceProvider, 
-        configurationAdmin.GetValue<string>("email"),
-        configurationAdmin.GetValue<string>("password"), configurationAdmin.GetValue<string>("role"));
+        configurationAdmin.GetValue<string>("email") ?? throw new InvalidOperationException(),
+        configurationAdmin.GetValue<string>("password")  ?? throw new InvalidOperationException(), 
+        configurationAdmin.GetValue<string>("role")  ?? throw new InvalidOperationException()) ;
     
 }
 
