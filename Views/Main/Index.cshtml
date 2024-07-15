@@ -24,12 +24,12 @@
         <label>@i.Title</label>
         <label>Дата - @i.Date.ToLocalTime().</label>   
         <label>Создатель - @i.Writer</label>
-        @if (i.Writer == UserManager.GetUserName(User))
+        @if (i.Writer == UserManager.GetUserName(User) || User.IsInRole("Admin"))
         {
-            @*<form asp-controller="Main" asp-action="Delete">
-                <input type="hidden" name="id" value="@i.AspNetUsersId"/>
+            <form asp-controller="Main" asp-action="Delete">
+                <input type="hidden" name="id" value="@i.Id"/>
                 <button>Удалить</button>
-            </form>*@
+            </form>
         }
         
     </div>

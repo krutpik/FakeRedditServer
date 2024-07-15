@@ -10,6 +10,8 @@ using FakeReddit.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.IdentityModel.Tokens.Jwt;
+
 
 namespace FakeReddit.Areas.Identity.Pages.Account.Manage
 {

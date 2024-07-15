@@ -19,8 +19,7 @@ public class Theme
     [Required]
     [Length(minimumLength: 1, maximumLength: 32)]
     public string? Title { get; set; }
-    public int Rate { get; set; } = 0;
+    public int Rate { get; set; }
     public DateTime Date { get; set; } = DateTime.Now.ToUniversalTime();
-
 }
 

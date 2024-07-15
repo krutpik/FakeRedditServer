@@ -58,7 +58,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Main}/{action=Index}/{theme?}");
+    pattern: "{controller=Main}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
