@@ -4,6 +4,7 @@ using FakeReddit.Areas.Identity.Data;
 using FakeReddit.Models;
 using FakeReddit.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataBaseContext>(options =>
@@ -24,12 +25,21 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var configurationAdmin = builder.Configuration.GetSection("Admin");
-    await SeedData.Initialize(scope.ServiceProvider, 
-        configurationAdmin.GetValue<string>("email") ?? throw new InvalidOperationException(),
-        configurationAdmin.GetValue<string>("password")  ?? throw new InvalidOperationException(), 
-        configurationAdmin.GetValue<string>("role")  ?? throw new InvalidOperationException()) ;
+
+    var admin = new User(builder.Configuration["Admin:email"]  ?? throw new InvalidOperationException(), 
+        builder.Configuration["Admin:password"]  ?? throw new InvalidOperationException(),
+        builder.Configuration["Admin:role"]  ?? throw new InvalidOperationException()
+        );
     
+    var user = new User(builder.Configuration["User:email"]  ?? throw new InvalidOperationException(), 
+        builder.Configuration["User:password"]  ?? throw new InvalidOperationException(),
+        builder.Configuration["User:role"]  ?? throw new InvalidOperationException()
+    );
+
+    
+    await SeedData.Initialize(scope.ServiceProvider, new User[] {admin, user});
+
+
 }
 
 // Configure the HTTP request pipeline.
