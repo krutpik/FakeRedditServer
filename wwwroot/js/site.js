@@ -23,3 +23,10 @@ function deleteTheme(id){
         data: {ID: id}
     })
 }
+
+function autoGrow(el) {
+    el.style.height = '5px';
+    el.style.height = el.scrollHeight + 'px';
+}
+
+document.querySelector('textarea').addEventListener('input', function() { autoGrow(this); });
