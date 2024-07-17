@@ -15,7 +15,9 @@
         <label asp-for="Title"></label>
         <input asp-for="Title" />
         <span asp-validation-for="Title"></span>
-        <input type="hidden" asp-for="UserId" name="UserId" value="@UserManager.GetUserId(User)"/>
+        <label asp-for="Content"></label>
+        <textarea class="lak" cols="60" type="text" asp-for="Content" ></textarea>
+        <span asp-validation-for="Content"></span>
     </div>
     <input type="submit" asp-action="Create"/>
 </form>

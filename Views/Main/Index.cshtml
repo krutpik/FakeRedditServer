@@ -10,27 +10,15 @@
    
 }
 
-@section style
-{
-    <link rel="stylesheet" href="~/css/main.css"/>
-}
-
 @foreach(var i in Model)
 {   
     <div class="main">
         @*<button onclick="changeRate('+', '@i.AspNetUsersId')">+</button>
         <label>@i.Rate</label>
         <button onclick="changeRate('-', '@i.AspNetUsersId')">-</button>*@
-        <label>@i.Title</label>
-        <label>Дата - @i.Date.ToLocalTime().</label>   
-        <label>Создатель - @i.Writer</label>
-        @if (i.Writer == UserManager.GetUserName(User) || User.IsInRole("Admin"))
-        {
-            <form asp-controller="Main" asp-action="Delete">
-                <input type="hidden" name="id" value="@i.Id"/>
-                <button>Удалить</button>
-            </form>
-        }
+        <a asp-action="Theme" asp-route-id="@i.Id">@i.Title</a>
+        <p>Дата - @i.Date.ToLocalTime().</p>
+        <p>Создатель - @i.Writer</p>
         
     </div>
 }
