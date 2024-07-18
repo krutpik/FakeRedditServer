@@ -18,8 +18,8 @@ public class SeedData
         }
     }
 
-    
-    public static async Task CreateAccount(string email, string password, string role)
+
+    private static async Task CreateAccount(string email, string password, string role)
     {
         if (_userManager == null) throw new InvalidOperationException();
         
@@ -32,6 +32,7 @@ public class SeedData
                 UserName = email,
                 EmailConfirmed = true,
             };
+
             var result = await _userManager.CreateAsync(user, password);
             
             if (result.Errors.Any())

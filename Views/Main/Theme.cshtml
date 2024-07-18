@@ -18,16 +18,37 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <h1>@Model.Title</h1>
-        <p>@Model.Content</p>
-        @if (@Model.Writer == UserManager.GetUserName(User) || User.IsInRole("Admin"))
-        {
+<div>
+    <h1>@Model.Title</h1>
+    <p>@Model.Content</p>
+    @if (@Model.Writer == UserManager.GetUserName(User) || User.IsInRole("Admin"))
+    {
         <form asp-controller="Main" asp-action="Delete">
             <input type="hidden" name="id" value="@Model.Id"/>
             <button>Удалить</button>
         </form>
-        }
-    </div>
+    }
+</div>
+<hr/>
+<form asp-action="Comment">
+    <label>Комментарий</label>
+    <input type="hidden" name="id" value="@Model.Id"/>
+    <input type="text" name="content"/>
+    <input type="submit"/>
+</form>
+
+<div class="comment-list">
+    @foreach (var i in Model.Comments)
+    {
+        <div class="comment">
+            <p class="author-comment">@i.Writer</p>
+            <p class="author-comment">Пост говно атписка</p>
+            <div class="comment-button">
+                <a style="color: red" asp-action="Comment">Удалить</a>
+                <a>Редактировать</a>
+            </div>
+        </div>
+    }
+</div>
 </body>
 </html>

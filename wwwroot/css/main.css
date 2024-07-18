@@ -1,9 +1,21 @@
 .main {
-    border: solid;   
+    border: solid;
     margin-bottom: 10px;
     font-size: 50px;
 }
 
 .lak {
     position: absolute;
+}
+
+.comment {
+    border: 2px solid;
+    padding: 10px;
+    display: flex;
+    width: max-content;
+    margin-bottom: 10px;
+}
+
+.author-comment {
+    margin-right: 25px;
 }
