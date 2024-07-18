@@ -7,5 +7,7 @@ bin/
 [Rr]elease/
 [Rr]eleases/
 
+/Migrations
+
 
 
