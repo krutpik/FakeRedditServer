@@ -30,7 +30,7 @@
     }
 </div>
 <hr/>
-<form asp-action="Comment">
+<form asp-action="Comment" style="margin-bottom: 20px">
     <label>Комментарий</label>
     <input type="hidden" name="id" value="@Model.Id"/>
     <input type="text" name="content"/>
@@ -42,11 +42,19 @@
     {
         <div class="comment">
             <p class="author-comment">@i.Writer</p>
-            <p class="author-comment">Пост говно атписка</p>
-            <div class="comment-button">
-                <a style="color: red" asp-action="Comment">Удалить</a>
-                <a>Редактировать</a>
-            </div>
+            <p class="author-comment">@i.Content</p>
+            @if (@i.Writer == UserManager.GetUserName(User) || User.IsInRole("Admin"))
+            {
+                <div class="comment-button">
+                    <form asp-action="DeleteComment">
+                        <input type="hidden" name="id" value="@i.id"/>
+                        <input type="hidden" name="themeId" value="@Model.Id"/>
+                        <input type="submit" value="удалить"/>
+                    </form>
+                    <a>Редактировать</a>
+                </div>
+            }
+            
         </div>
     }
 </div>
