@@ -1,0 +1,10 @@
+﻿@model ThemeView
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id"/>
+    <label asp-for="Title"></label>
+    <input asp-for="Title" value="@Model.Title"/>
+    <label asp-for="Content"></label>
+    <input asp-for="Content" value="@Model.Content"/>
+    <input type="submit"/>
+</form>

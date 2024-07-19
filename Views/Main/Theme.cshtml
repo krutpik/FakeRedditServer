@@ -25,7 +25,13 @@
     {
         <form asp-controller="Main" asp-action="Delete">
             <input type="hidden" name="id" value="@Model.Id"/>
-            <button>Удалить</button>
+            <input type="submit" value="Удалить"/>
+        </form>
+        <form asp-controller="Main" asp-action="Edit" method="get">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="Title"/>
+            <input type="hidden" asp-for="Content"/>
+            <input type="submit" value="Редактировать"/>
         </form>
     }
 </div>
@@ -51,7 +57,6 @@
                         <input type="hidden" name="themeId" value="@Model.Id"/>
                         <input type="submit" value="удалить"/>
                     </form>
-                    <a>Редактировать</a>
                 </div>
             }
             
