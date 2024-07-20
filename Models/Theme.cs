@@ -23,6 +23,7 @@ public class Theme
     public string? Title { get; set; }
     public string? Content { get; set; }
     public DateTime Date { get; set; } = DateTime.Now.ToUniversalTime();
+    public int views { get; set; }
     public virtual List<Comment> Comments { get; set; }
     public virtual ICollection<Rate> Rates { get; set; }
 }
