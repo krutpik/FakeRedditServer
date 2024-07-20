@@ -2,20 +2,24 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model List<ThemeView>
 
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Antiforgery
 @inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewBag.Title = "Main";
     Layout = "_Layout"; 
    
+    var requestToken = Antiforgery.GetAndStoreTokens(Context).RequestToken; 
 }
+
+<input id="RequestVerificationToken" type="hidden" value="@requestToken" />
 
 @foreach(var i in Model)
 {   
     <div class="main">
-        @*<button onclick="changeRate('+', '@i.AspNetUsersId')">+</button>
+        <button onclick="changeRate(true, @i.Id)">+</button>
         <label>@i.Rate</label>
-        <button onclick="changeRate('-', '@i.AspNetUsersId')">-</button>*@
+        <button onclick="changeRate(false, @i.Id)">-</button>
         <a asp-action="Theme" asp-route-id="@i.Id">@i.Title</a>
         <p>Дата - @i.Date.ToLocalTime().</p>
         <p>Создатель - @i.Writer</p>

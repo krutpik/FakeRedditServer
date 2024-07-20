@@ -1,28 +1,18 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-function changeRate(rate, id){
+﻿function changeRate(rate, id){
     $.ajax({
-        url: '/main/ChangeRate',
+        url: '/main/RateChange',
         method: 'post',
         dataType: 'json',
-        data: {Id: id,
-               Rate: rate
+        data: {
+            Id: id,
+            dataRate: rate,
+            __RequestVerificationToken: document.getElementById("RequestVerificationToken").value,
         
         },
         
     });
 }
 
-function deleteTheme(id){
-    $.ajax({
-        url: '/Main/Delete',
-        method: 'post',
-        dataType: 'json',
-        data: {ID: id}
-    })
-}
 
 function autoGrow(el) {
     el.style.height = '5px';

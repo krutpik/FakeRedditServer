@@ -10,6 +10,7 @@ public class ApplicationUser : IdentityUser
 {
     public virtual ICollection<Theme> Themes { get; set; }
     public virtual ICollection<Comment> Comments { get; set; }
+    public virtual ICollection<Rate> Rates { get; set; }
 }
 
 public class Theme
@@ -21,8 +22,8 @@ public class Theme
     [Length(minimumLength: 1, maximumLength: 32)]
     public string? Title { get; set; }
     public string? Content { get; set; }
-    public int Rate { get; set; }
     public DateTime Date { get; set; } = DateTime.Now.ToUniversalTime();
     public virtual List<Comment> Comments { get; set; }
+    public virtual ICollection<Rate> Rates { get; set; }
 }
 
