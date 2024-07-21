@@ -1,0 +1,17 @@
+services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  postgres:
+    image: "postgres"
+    restart: always
+    ports:
+      - "9999:5432"
+    environment:
+      POSTGRES_PASSWORD: 333
+  web:
+    build: .
+    ports:
+      - "5001:8080"    

@@ -11,7 +11,7 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DbContext") ?? throw new InvalidOperationException("Connection string 'DbContext' not found.")));
 
 builder.Services.AddDbContext<FakeRedditIdentityDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("FakeRedditIdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'FakeRedditIdentityDbContextConnection' not found.")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DbContext") ?? throw new InvalidOperationException("Connection string 'FakeRedditIdentityDbContextConnection' not found.")));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
@@ -21,7 +21,19 @@ builder.Services.AddScoped<SignInManager<ApplicationUser>, MyIdentity>();
 
 builder.Services.AddControllersWithViews();
 
+
 var app = builder.Build();
+
+using (var scope1 = app.Services.CreateScope())
+{
+    var services = scope1.ServiceProvider;
+
+    var context = services.GetRequiredService<FakeRedditIdentityDbContext>();
+    if (context.Database.GetPendingMigrations().Any())
+    {
+        context.Database.Migrate();
+    }
+}
 
 using (var scope = app.Services.CreateScope())
 {
