@@ -43,13 +43,13 @@ using (var scope = app.Services.CreateScope())
         builder.Configuration["Admin:role"]  ?? throw new InvalidOperationException()
         );
     
-    var user = new User(builder.Configuration["User:email"]  ?? throw new InvalidOperationException(), 
+    /*var user = new User(builder.Configuration["User:email"]  ?? throw new InvalidOperationException(), 
         builder.Configuration["User:password"]  ?? throw new InvalidOperationException(),
         builder.Configuration["User:role"]  ?? throw new InvalidOperationException()
-    );
+    );*/
 
     
-    await SeedData.Initialize(scope.ServiceProvider, new User[] {admin, user});
+    await SeedData.Initialize(scope.ServiceProvider, new User[] {admin});
 
 
 }
