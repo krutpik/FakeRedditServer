@@ -15,7 +15,7 @@
 <input id="RequestVerificationToken" type="hidden" value="@requestToken" />
 
 @foreach(var i in Model)
-{   
+{
     <div class="main">
         <button onclick="changeRate(true, @i.Id)">+</button>
         <label>@i.Rate</label>

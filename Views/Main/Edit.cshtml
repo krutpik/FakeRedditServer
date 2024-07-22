@@ -1,10 +1,21 @@
 ﻿@model ThemeView
 
+@{
+    ViewData["Title"] = "Edit";
+}
+
 <form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
     <input type="hidden" asp-for="Id"/>
     <label asp-for="Title"></label>
     <input asp-for="Title" value="@Model.Title"/>
+    <span asp-validation-for="Title"></span>
     <label asp-for="Content"></label>
     <input asp-for="Content" value="@Model.Content"/>
+    <span asp-validation-for="Content"></span>
     <input type="submit"/>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

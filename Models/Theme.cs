@@ -20,8 +20,10 @@ public class Theme
     public ApplicationUser User { get; set; } = null!;
     [Required]
     [Length(minimumLength: 1, maximumLength: 32)]
-    public string? Title { get; set; }
-    public string? Content { get; set; }
+    public string Title { get; set; }
+    [Required]
+    [Length(minimumLength: 1, maximumLength: 40000)]
+    public string Content { get; set; }
     public DateTime Date { get; set; } = DateTime.Now.ToUniversalTime();
     public int views { get; set; }
     public virtual List<Comment> Comments { get; set; }

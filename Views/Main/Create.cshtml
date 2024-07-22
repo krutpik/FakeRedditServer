@@ -1,16 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 
-@model Theme
+@model ThemeView
 
 @inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewBag.Title = "title";
-    Layout = "_Layout";
 }
 
 <form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
     <div>
         <label asp-for="Title"></label>
         <input asp-for="Title" />
@@ -21,3 +21,7 @@
     </div>
     <input type="submit" asp-action="Create"/>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -5,6 +5,8 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
+ 
+    ViewData["Title"] = "Theme";
     
 }
 
@@ -20,16 +22,14 @@
         </form>
         <form asp-controller="Main" asp-action="Edit" method="get">
             <input type="hidden" asp-for="Id"/>
-            <input type="hidden" asp-for="Title"/>
-            <input type="hidden" asp-for="Content"/>
             <input type="submit" value="Редактировать"/>
         </form>
     }
 </div>
 <hr/>
 <form asp-action="Comment" style="margin-bottom: 20px">
-        <label>Комментарий</label>
-        <input type="hidden" name="id" value="@Model.Id"/>
+    <label>Комментарий</label>
+    <input type="hidden" name="id" value="@Model.Id"/>
     <input type="text" name="content"/>
     <input type="submit"/>
 </form>
