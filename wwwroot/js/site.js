@@ -9,10 +9,18 @@
             __RequestVerificationToken: document.getElementById("RequestVerificationToken").value,
         
         },
-        
     });
 }
 
+window.addEventListener("load", () => {
+    const uri = document.getElementById("qrCodeData").getAttribute('data-url');
+    new QRCode(document.getElementById("qrCode"),
+        {
+            text: uri,
+            width: 150,
+            height: 150
+        });
+});
 
 function autoGrow(el) {
     el.style.height = '5px';
