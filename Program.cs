@@ -4,6 +4,7 @@ using FakeReddit.Areas.Identity.Data;
 using FakeReddit.Models;
 using FakeReddit.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,15 +29,17 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddScoped<SignInManager<ApplicationUser>, MyIdentity>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 builder.Services.AddControllersWithViews();
 
 
 var app = builder.Build();
 
-using (var scope1 = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
-    var services = scope1.ServiceProvider;
+    var services = scope.ServiceProvider;
 
     var context = services.GetRequiredService<FakeRedditIdentityDbContext>();
     if (context.Database.GetPendingMigrations().Any())
@@ -47,21 +50,12 @@ using (var scope1 = app.Services.CreateScope())
 
 using (var scope = app.Services.CreateScope())
 {
-
     var admin = new User(builder.Configuration["Admin:email"]  ?? throw new InvalidOperationException(), 
         builder.Configuration["Admin:password"]  ?? throw new InvalidOperationException(),
         builder.Configuration["Admin:role"]  ?? throw new InvalidOperationException()
         );
     
-    /*var user = new User(builder.Configuration["User:email"]  ?? throw new InvalidOperationException(), 
-        builder.Configuration["User:password"]  ?? throw new InvalidOperationException(),
-        builder.Configuration["User:role"]  ?? throw new InvalidOperationException()
-    );*/
-
-    
     await SeedData.Initialize(scope.ServiceProvider, new User[] {admin});
-
-
 }
 
 // Configure the HTTP request pipeline.

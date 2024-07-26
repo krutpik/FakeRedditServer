@@ -7,6 +7,4 @@ bin/
 [Rr]elease/
 [Rr]eleases/
 
-
-
-
+appsettings.Development.json
